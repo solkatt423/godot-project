@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cewuond6y4qwv"]
+
+[ext_resource type="Texture2D" uid="uid://isydp8jt0sox" path="res://AssetBundle/Sprites/ForestBackground.png" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://b8cdum3re3sb4" path="res://Scenes/player.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://ces855iqrx33v" path="res://Scenes/slime.tscn" id="3_wrm1d"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qxrlw"]
+normal = Vector2(0.014771832, -0.99989086)
+distance = 47.0
+
+[node name="Node2D" type="Node2D" unique_id=1332894982]
+y_sort_enabled = true
+
+[node name="Background1" type="Sprite2D" parent="." unique_id=1676106152]
+position = Vector2(-121, 0)
+texture = ExtResource("1_ebmjs")
+metadata/_edit_lock_ = true
+
+[node name="Background2" type="Sprite2D" parent="." unique_id=1545998860]
+position = Vector2(120, 0)
+texture = ExtResource("1_ebmjs")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1438816460]
+zoom = Vector2(2.375, 2.375)
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." unique_id=91463716 instance=ExtResource("2_qxrlw")]
+position = Vector2(-187, 81)
+
+[node name="Boundary" type="Node2D" parent="." unique_id=1780388812]
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Boundary" unique_id=2026339250]
+position = Vector2(-1, 141)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D" unique_id=121066948]
+position = Vector2(0, 43)
+shape = SubResource("WorldBoundaryShape2D_qxrlw")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Boundary" unique_id=452668717]
+position = Vector2(-244, -1.9999847)
+rotation = 1.5676345
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D2" unique_id=855728945]
+position = Vector2(0, 43)
+shape = SubResource("WorldBoundaryShape2D_qxrlw")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Boundary" unique_id=2079869045]
+position = Vector2(1.0000002, 33)
+rotation = 3.1253958
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D3" unique_id=594770686]
+position = Vector2(0, 43)
+shape = SubResource("WorldBoundaryShape2D_qxrlw")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Boundary" unique_id=574349618]
+position = Vector2(243.99998, 0)
+rotation = -1.5912117
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D4" unique_id=1692806853]
+position = Vector2(0, 43)
+shape = SubResource("WorldBoundaryShape2D_qxrlw")
+
+[node name="Area2D" parent="." unique_id=170273574 instance=ExtResource("3_wrm1d")]
+position = Vector2(195, 71)
