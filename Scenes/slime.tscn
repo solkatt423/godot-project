@@ -2,6 +2,36 @@
 
 [ext_resource type="Texture2D" uid="uid://dim5qmkmx2qf3" path="res://AssetBundle/Sprites/Slimer.png" id="1_jokqx"]
 [ext_resource type="Script" uid="uid://qfbcvlqvo20a" path="res://Scripts/enemy.gd" id="1_swwnm"]
+[ext_resource type="Texture2D" uid="uid://dwts0t221fo1f" path="res://AssetBundle/Sprites/SlimerDeath.png" id="2_aiwxb"]
+[ext_resource type="AudioStream" uid="uid://d10wcascp0e02" path="res://AssetBundle/Audio/EnemyDeath.mp3" id="4_paq7w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y26kt"]
+atlas = ExtResource("2_aiwxb")
+region = Rect2(0, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7ij5"]
+atlas = ExtResource("2_aiwxb")
+region = Rect2(64, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psnrq"]
+atlas = ExtResource("2_aiwxb")
+region = Rect2(128, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh8cv"]
+atlas = ExtResource("2_aiwxb")
+region = Rect2(192, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_555id"]
+atlas = ExtResource("2_aiwxb")
+region = Rect2(256, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq7bh"]
+atlas = ExtResource("2_aiwxb")
+region = Rect2(320, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10642"]
+atlas = ExtResource("2_aiwxb")
+region = Rect2(384, 0, 64, 58)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_swwnm"]
 atlas = ExtResource("1_jokqx")
@@ -39,6 +69,32 @@ region = Rect2(287, 0, 41, 38)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_y26kt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7ij5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psnrq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh8cv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_555id")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq7bh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10642")
+}],
+"loop": false,
+"name": &"death",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_swwnm")
 }, {
 "duration": 1.0,
@@ -63,7 +119,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_r4o34")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 12.0
 }]
 
@@ -76,11 +132,17 @@ slime_speed = -50.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=129932767]
 sprite_frames = SubResource("SpriteFrames_y26kt")
-autoplay = "default"
-frame_progress = 0.5044905
+animation = &"death"
+autoplay = "idle"
+frame = 6
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=898607377]
 position = Vector2(0, 10)
 shape = SubResource("CircleShape2D_c7ij5")
 
+[node name="deathsound" type="AudioStreamPlayer" parent="." unique_id=1942519775]
+stream = ExtResource("4_paq7w")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

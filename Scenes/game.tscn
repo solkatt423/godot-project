@@ -1,15 +1,22 @@
 [gd_scene format=3 uid="uid://cewuond6y4qwv"]
 
+[ext_resource type="Script" uid="uid://drn3h57a5wph3" path="res://Scripts/GameManager.gd" id="1_3dryh"]
 [ext_resource type="Texture2D" uid="uid://isydp8jt0sox" path="res://AssetBundle/Sprites/ForestBackground.png" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://b8cdum3re3sb4" path="res://Scenes/player.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://ces855iqrx33v" path="res://Scenes/slime.tscn" id="3_wrm1d"]
+[ext_resource type="FontFile" uid="uid://du1hya6tnjlmt" path="res://AssetBundle/Uranus_Pixel_11Px.ttf" id="5_wowpa"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qxrlw"]
 normal = Vector2(0.014771832, -0.99989086)
 distance = 47.0
 
-[node name="Node2D" type="Node2D" unique_id=1332894982]
+[node name="Node2D" type="Node2D" unique_id=1332894982 node_paths=PackedStringArray("spawn_timer", "score_label", "game_over_label")]
 y_sort_enabled = true
+script = ExtResource("1_3dryh")
+slime_scene = ExtResource("3_wrm1d")
+spawn_timer = NodePath("Timer")
+score_label = NodePath("CanvasLayer/Label")
+game_over_label = NodePath("CanvasLayer/Game Over Label")
 
 [node name="Background1" type="Sprite2D" parent="." unique_id=1676106152]
 position = Vector2(-121, 0)
@@ -26,7 +33,7 @@ zoom = Vector2(2.375, 2.375)
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." unique_id=91463716 instance=ExtResource("2_qxrlw")]
-position = Vector2(-187, 81)
+position = Vector2(-201, 75)
 
 [node name="Boundary" type="Node2D" parent="." unique_id=1780388812]
 metadata/_edit_lock_ = true
@@ -63,5 +70,58 @@ rotation = -1.5912117
 position = Vector2(0, 43)
 shape = SubResource("WorldBoundaryShape2D_qxrlw")
 
-[node name="Area2D" parent="." unique_id=170273574 instance=ExtResource("3_wrm1d")]
-position = Vector2(195, 71)
+[node name="Timer" type="Timer" parent="." unique_id=714324683]
+wait_time = 3.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=678348135]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=581933239]
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 87.0
+offset_bottom = 43.0
+theme_override_fonts/font = ExtResource("5_wowpa")
+theme_override_font_sizes/font_size = 48
+text = "Score: 0"
+
+[node name="Game Over Label" type="Label" parent="CanvasLayer" unique_id=269983486]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.0
+offset_top = -24.5
+offset_right = 127.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.3214715, 0.40573266, 0.19109672, 1)
+theme_override_constants/outline_size = 60
+theme_override_fonts/font = ExtResource("5_wowpa")
+theme_override_font_sizes/font_size = 120
+text = "GAME OVER!"
+
+[node name="Game Over Label2" type="Label" parent="CanvasLayer/Game Over Label" unique_id=417331951]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -319.0
+offset_top = 72.0
+offset_right = 315.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.3214715, 0.40573266, 0.19109672, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("5_wowpa")
+theme_override_font_sizes/font_size = 48
+text = "Game By Solkatt"
+horizontal_alignment = 1
+
+[connection signal="timeout" from="Timer" to="." method="_spawn_slime"]

@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oduel"]
 size = Vector2(6, 3)
 
-[node name="Bullet" type="Area2D" unique_id=976974862]
+[node name="Bullet" type="Area2D" unique_id=976974862 groups=["bullet"]]
 script = ExtResource("1_oduel")
 bullet_speed = 300.0
 
